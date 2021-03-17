@@ -1,0 +1,51 @@
+plugins {
+  id 'com.github.ben-manes.versions'
+  id 'idea'
+  id 'scala'
+}
+
+group = 'org.podval.types'
+description = 'Types and Proofs'
+version = '0.1'
+
+idea {
+  module {
+    excludeDirs += [
+      file('.idea'),
+      file('gradle')
+    ]
+  }
+}
+
+idea {
+  project {
+    jdkName = '11'
+    vcs = 'Git'
+  }
+
+  module {
+    excludeDirs += [
+      file('.idea'),
+      file('gradle')
+    ]
+  }
+}
+
+// There is no Java in the project :)
+project.gradle.startParameter.excludedTaskNames.add('compileJava')
+
+tasks.withType(ScalaCompile) {
+  scalaCompileOptions.with {
+    targetCompatibility = '1.8'
+    additionalParameters = ['-feature']
+  }
+}
+
+dependencies {
+  implementation "org.scala-lang:scala-library:$scalaVersion"
+
+  testImplementation "org.scalatest:scalatest_$scalaVersionMajor:$scalatestVersion"
+  // for scalatest reports
+  testRuntimeOnly "com.vladsch.flexmark:flexmark:$flexmarkVersion"
+  testRuntimeOnly "com.vladsch.flexmark:flexmark-profile-pegdown:$flexmarkVersion"
+}

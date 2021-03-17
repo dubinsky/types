@@ -1,0 +1,19 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+
+    plugins {
+        id 'com.github.ben-manes.versions' version '0.38.0'
+        id 'com.github.maiflai.scalatest' version '0.30'
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'org.podval.types'
